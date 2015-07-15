@@ -9,8 +9,7 @@ import javax.sound.midi.MidiEvent;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
-import java.math.BigInteger;
-import java.util.Random;
+import java.io.FileOutputStream;
 
 /**
  * @author Josh Klun (jklun@nerdery.com)
@@ -39,9 +38,9 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 19, HALF_TICKS, QUARTER_TICKS);
 
         addNote(melodyTrack, MIDDLE_C + 12, QUARTER_TICKS + HALF_TICKS + WHOLE_TICKS + WHOLE_TICKS, QUARTER_TICKS);
-        addNote(melodyTrack, MIDDLE_C + 7, WHOLE_TICKS, QUARTER_TICKS);
-        addNote(melodyTrack, MIDDLE_C + 4, WHOLE_TICKS, QUARTER_TICKS);
-        addNote(melodyTrack, MIDDLE_C + 9, WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 7, WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 4, WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 9, WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 11, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 10, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 9, SIXTEENTH_TICKS, QUARTER_TICKS);
@@ -57,10 +56,10 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 14, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 11, SIXTEENTH_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 12, WHOLE_TICKS, QUARTER_TICKS);
-        addNote(melodyTrack, MIDDLE_C + 7, WHOLE_TICKS, QUARTER_TICKS);
-        addNote(melodyTrack, MIDDLE_C + 4, WHOLE_TICKS, QUARTER_TICKS);
-        addNote(melodyTrack, MIDDLE_C + 9, WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 12, WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 7, WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 4, WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 9, WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 11, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 10, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 9, SIXTEENTH_TICKS, QUARTER_TICKS);
@@ -76,7 +75,8 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 14, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 11, SIXTEENTH_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 19, SIXTEENTH_TICKS + WHOLE_TICKS + WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 19, (WHOLE_TICKS - SIXTEENTH_TICKS)
+                + WHOLE_TICKS - QUARTER_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 18, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 17, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 15, SIXTEENTH_TICKS, QUARTER_TICKS);
@@ -88,7 +88,7 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 12, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 14, SIXTEENTH_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 19, SIXTEENTH_TICKS + WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 19, (SIXTEENTH_TICKS) + WHOLE_TICKS - QUARTER_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 18, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 17, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 15, SIXTEENTH_TICKS, QUARTER_TICKS);
@@ -97,7 +97,8 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 24, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 24, SIXTEENTH_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 19, QUARTER_TICKS + WHOLE_TICKS + WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 19, (SIXTEENTH_TICKS + WHOLE_TICKS)
+                + WHOLE_TICKS - QUARTER_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 18, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 17, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 15, SIXTEENTH_TICKS, QUARTER_TICKS);
@@ -109,11 +110,12 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 12, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 14, SIXTEENTH_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 15, WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 15, (SIXTEENTH_TICKS) + WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 14, WHOLE_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 12, WHOLE_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 19, QUARTER_TICKS + WHOLE_TICKS + WHOLE_TICKS + WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 19, (SIXTEENTH_TICKS + QUARTER_TICKS + WHOLE_TICKS + WHOLE_TICKS)
+                + WHOLE_TICKS - QUARTER_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 18, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 17, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 15, SIXTEENTH_TICKS, QUARTER_TICKS);
@@ -125,7 +127,7 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 12, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 14, SIXTEENTH_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 19, SIXTEENTH_TICKS + WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 19, (SIXTEENTH_TICKS) + WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 18, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 17, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 15, SIXTEENTH_TICKS, QUARTER_TICKS);
@@ -134,7 +136,8 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 24, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 24, SIXTEENTH_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 19, QUARTER_TICKS + WHOLE_TICKS + WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 19, (SIXTEENTH_TICKS + WHOLE_TICKS)
+                + WHOLE_TICKS - QUARTER_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 18, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 17, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 15, SIXTEENTH_TICKS, QUARTER_TICKS);
@@ -146,11 +149,12 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 12, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 14, SIXTEENTH_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 15, WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 15, (SIXTEENTH_TICKS) + WHOLE_TICKS - SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 14, WHOLE_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 12, WHOLE_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 12, HALF_TICKS + WHOLE_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 12, (SIXTEENTH_TICKS + QUARTER_TICKS + WHOLE_TICKS + WHOLE_TICKS),
+                QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 12, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 12, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 12, HALF_TICKS, QUARTER_TICKS);
@@ -160,12 +164,23 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(melodyTrack, MIDDLE_C + 9, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 7, SIXTEENTH_TICKS, QUARTER_TICKS);
 
-        addNote(melodyTrack, MIDDLE_C + 12, QUARTER_TICKS + HALF_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 12, QUARTER_TICKS + WHOLE_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 12, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 12, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 12, HALF_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 14, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(melodyTrack, MIDDLE_C + 16, SIXTEENTH_TICKS, QUARTER_TICKS);
+
+        addNote(melodyTrack, MIDDLE_C + 12, (SIXTEENTH_TICKS + WHOLE_TICKS + WHOLE_TICKS + WHOLE_TICKS),
+                QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 12, SIXTEENTH_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 12, HALF_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 12, HALF_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 14, SIXTEENTH_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 16, HALF_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 12, SIXTEENTH_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 9, HALF_TICKS, QUARTER_TICKS);
+        addNote(melodyTrack, MIDDLE_C + 7, SIXTEENTH_TICKS, QUARTER_TICKS);
 
         endTrack(melodyTrack);
     }
@@ -194,5 +209,9 @@ public class MarioGenerator extends AbstractMidiGenerator {
         shortMessage.setMessage(ShortMessage.NOTE_OFF, note, 0x40);
         midiEvent = new MidiEvent(shortMessage, addTrackTicks(track.toString(), duration));
         track.add(midiEvent);
+    }
+
+    public static void main(String[] args) throws Exception {
+        new MarioGenerator().generateSong(new FileOutputStream("Z:\\Projects\\jvm-challenge\\NerdSoundChallenge\\mario.mid"));
     }
 }

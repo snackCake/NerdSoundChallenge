@@ -9,6 +9,7 @@ import javax.sound.midi.InvalidMidiDataException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -37,5 +38,9 @@ public class MidiService {
 
     public boolean isValidGenerator(String filterName) {
         return generators.containsKey(filterName);
+    }
+
+    public Collection<MidiGenerator> getGenerators() {
+        return generators.values();
     }
 }

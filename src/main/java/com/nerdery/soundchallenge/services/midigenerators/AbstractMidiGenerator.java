@@ -127,10 +127,14 @@ public abstract class AbstractMidiGenerator implements MidiGenerator {
     }
 
     protected void endTrack(Track track) throws InvalidMidiDataException {
+        endTrack(track, 0l);
+    }
+
+    protected void endTrack(Track track, long delay) throws InvalidMidiDataException {
         MetaMessage metaMessage = new MetaMessage();
         byte[] bet = {}; // empty array
         metaMessage.setMessage(0x2F, bet, 0);
-        track.add(new MidiEvent(metaMessage, (long) 140));
+        track.add(new MidiEvent(metaMessage, addTrackTicks(track.toString(), delay)));
     }
 
     private void configureTempo(Track track) throws InvalidMidiDataException {

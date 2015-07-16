@@ -129,4 +129,54 @@ object GeneralMidiVoices {
   val Helicopter = 126
   val Applause = 127
   val Gunshot = 128
+  
+  object Percussion{
+    val BassDrum2 = 35
+    val BassDrum1 = 36
+    val SideStickRimshot = 37
+    val SnareDrum1 = 38
+    val HandClap = 39
+    val SnareDrum2 = 40
+    val LowTom2 = 41
+    val ClosedHiHat = 42
+    val LowTom1 = 43
+    val PedalHiHat = 44
+    val MidTom2 = 45
+    val OpenHiHat = 46
+    val MidTom1 = 47
+    val HighTom2 = 48
+    val CrashCymbal1 = 49
+    val HighTom1 = 50
+    val RideCymbal1 = 51
+    val ChineseCymbal = 52
+    val RideBell = 53
+    val Tambourine = 54
+    val SplashCymbal = 55
+    val Cowbell = 56
+    val CrashCymbal2 = 57
+    val VibraSlap = 58
+    val RideCymbal2 = 59
+    val HighBongo = 60
+    val LowBongo = 61
+    val MuteHighConga = 62
+    val OpenHighConga = 63
+    val LowConga = 64
+    val HighTimbale = 65
+    val LowTimbale = 66
+    val HighAgogo = 67
+    val LowAgogo = 68
+    val Cabasa = 69
+    val Maracas = 70
+    val ShortWhistle = 71
+    val LongWhistle = 72
+    val ShortGuiro = 73
+    val LongGuiro = 74
+    val Claves = 75
+    val HighWoodBlock = 76
+    val LowWoodBlock = 77
+    val MuteCuica = 78
+    val OpenCuica = 79
+    val MuteTriangle = 80
+    val OpenTriangle = 81
+  }
 }

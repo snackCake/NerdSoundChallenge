@@ -32,17 +32,17 @@ public class MarioGenerator extends AbstractMidiGenerator {
         Track melody = buildTrack(sequence, "Melody", 0);
         setVoice(melody, LEAD1_VOICE);
         buildMelody(melody);
-        endTrack(melody);
+        endTrack(melody, WHOLE_TICKS);
 
         Track harmony = buildTrack(sequence, "Harmony", 1);
         setVoice(harmony, LEAD1_VOICE);
         buildHarmony(harmony);
-        endTrack(harmony);
+        endTrack(harmony, WHOLE_TICKS);
 
         Track backup = buildTrack(sequence, "Backup", 2);
         setVoice(backup, JAZZ_GTAR_VOICE);
         buildBackup(backup);
-        endTrack(backup);
+        endTrack(backup, WHOLE_TICKS);
     }
 
     private void buildMelody(Track track) throws InvalidMidiDataException {
@@ -381,8 +381,6 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(track, MIDDLE_C + 16, QUARTER_TICKS, QUARTER_TICKS);
         addNote(track, MIDDLE_C + 14, QUARTER_TICKS, QUARTER_TICKS);
         addNote(track, MIDDLE_C + 12, QUARTER_TICKS, QUARTER_TICKS);
-
-        resetTrackTicks(track.toString());
     }
 
     private void buildHarmony(Track track) throws InvalidMidiDataException {
@@ -733,8 +731,6 @@ public class MarioGenerator extends AbstractMidiGenerator {
         addNote(track, MIDDLE_C + 4, SIXTEENTH_TICKS, QUARTER_TICKS);
         addNote(track, MIDDLE_C + 4, HALF_TICKS, QUARTER_TICKS);
         addNote(track, MIDDLE_C, SIXTEENTH_TICKS, QUARTER_TICKS);
-
-        resetTrackTicks(track.toString());
     }
 
     private void buildBackup(Track track) throws InvalidMidiDataException {
@@ -1090,8 +1086,6 @@ public class MarioGenerator extends AbstractMidiGenerator {
 //        addNote(track, MIDDLE_C + 4, SIXTEENTH_TICKS, QUARTER_TICKS);
 //        addNote(track, MIDDLE_C + 4, HALF_TICKS, QUARTER_TICKS);
 //        addNote(track, MIDDLE_C, SIXTEENTH_TICKS, QUARTER_TICKS);
-
-        resetTrackTicks(track.toString());
     }
 
     @Override

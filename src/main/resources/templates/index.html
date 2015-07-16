@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>NerdSoundChallenge</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="gutenweb.css"/>
+</head>
+<body>
+    <h1>Nerd Sound Challenge</h1>
+
+    <p>Click an entry to play.</p>
+    <p id="status" class="note"></p>
+    <a href="#" onclick="MIDIjs.stop();">Stop</a>
+
+    <h2>Entries:</h2>
+    <ul>
+        <li th:each="generator : ${generators}">
+            <a href="#"  th:onclick="'MIDIjs.play(\'' + ${generator.link} + '\');'" th:text="${generator.name}">Generator</a>
+        </li>
+    </ul>
+
+    <script type='text/javascript' src='http://www.midijs.net/lib/midi.js'></script>
+    <script type='text/javascript' src='jquery-1.11.3.js'></script>
+
+    <script>
+        MIDIjs.message_callback =
+            function midiStatus(message) {
+                $('#status').text(message);
+            };
+    </script>
+</body>
+</html>

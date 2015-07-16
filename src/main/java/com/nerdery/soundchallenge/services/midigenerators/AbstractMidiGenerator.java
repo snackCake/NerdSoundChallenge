@@ -44,6 +44,10 @@ public abstract class AbstractMidiGenerator implements MidiGenerator {
         return newTicks;
     }
 
+    protected void resetTrackTicks(String trackId) {
+        currentTicks.remove(trackId);
+    }
+
     protected Track buildTrack(Sequence sequence, String trackName) throws InvalidMidiDataException {
         Track track = sequence.createTrack();
         enableGeneralMidi(track);
@@ -56,15 +60,28 @@ public abstract class AbstractMidiGenerator implements MidiGenerator {
     protected abstract void addNotes(Sequence sequence) throws InvalidMidiDataException;
 
     protected void addNote(Track track, int note, long duration) throws InvalidMidiDataException {
+        addNote(track, note, 0l, duration);
+    }
+
+    protected void addNote(Track track, int channel, int note, long duration) throws InvalidMidiDataException {
+        addNote(track, channel, note, 0l, duration);
+    }
+
+    protected void addNote(Track track, int note, long pause, long duration) throws InvalidMidiDataException {
+        addNote(track, 0, note, pause, duration);
+    }
+
+    protected void addNote(Track track, int channel, int note, long pause, long duration)
+            throws InvalidMidiDataException {
         //****  note on ****
         ShortMessage shortMessage = new ShortMessage();
-        shortMessage.setMessage(0x90, note, 0x60);
-        MidiEvent midiEvent = new MidiEvent(shortMessage, getTrackTicks(track.toString()));
+        shortMessage.setMessage(ShortMessage.NOTE_ON, channel, note, 0x60);
+        MidiEvent midiEvent = new MidiEvent(shortMessage, addTrackTicks(track.toString(), pause));
         track.add(midiEvent);
 
         //****  note off  ****
         shortMessage = new ShortMessage();
-        shortMessage.setMessage(0x80, note, 0x40);
+        shortMessage.setMessage(ShortMessage.NOTE_OFF, channel, note, 0x40);
         midiEvent = new MidiEvent(shortMessage, addTrackTicks(track.toString(), duration));
         track.add(midiEvent);
     }
@@ -90,8 +107,12 @@ public abstract class AbstractMidiGenerator implements MidiGenerator {
     }
 
     protected void setVoice(Track track, int voiceNumber) throws InvalidMidiDataException {
+        setVoice(track, 0, voiceNumber);
+    }
+
+    protected void setVoice(Track track, int channel, int voiceNumber) throws InvalidMidiDataException {
         ShortMessage shortMessage = new ShortMessage();
-        shortMessage.setMessage(0xC0, voiceNumber, 0x0);
+        shortMessage.setMessage(0xC0, channel, voiceNumber, 0x0);
         track.add(new MidiEvent(shortMessage, (long) 0));
     }
 

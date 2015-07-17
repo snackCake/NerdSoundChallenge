@@ -24,10 +24,15 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
 
   override def generate()(implicit sequence: Sequence): Unit = {
     track("melody", SynthBass1, tempo) { implicit t =>
-      SequenceRun(
+      SequentialRun(
         intro,
         aSection repeat 2,
-        bSection repeat 2
+        bSection repeat 2,
+        cSection,
+        aSection repeat 2,
+        dSection repeat 2,
+        cSection,
+        dSection repeat 2
       )
     }
 
@@ -36,7 +41,7 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
     }
   }
 
-  def intro = SequenceRun(
+  def intro = SequentialRun(
     (D~3 + F.sharp~4 + E~5) * Eighth,
     (D~3 + F.sharp~4 + E~5) * Eighth,
     Rest * Eighth,
@@ -51,7 +56,7 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
     Rest * Quarter
   )
 
-  def aSection = SequenceRun(
+  def aSection = SequentialRun(
     (G~3 + E~4 + C~5) * Eighth,
     Rest * Quarter,
     (E~3 + C~4 + G~4) * Eighth,
@@ -82,7 +87,7 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
   )
 
   def bSection = ParallelRun(
-    SequenceRun(
+    SequentialRun(
       C~3 * Eighth,
       Rest * Quarter,
       G~3 * Eighth,
@@ -133,7 +138,7 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
       C~3 * Eighth,
       Rest * Eighth
     ),
-    SequenceRun(
+    SequentialRun(
       Rest * Quarter,
       (E~5 + MinThird) * Eighth,
       (D.sharp~5 + MinThird) * Eighth,
@@ -194,20 +199,156 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
     )
   )
 
+  def cSection = ParallelRun(
+    SequentialRun(
+      (A.flat~4 + MajThird) * Eighth,
+      (A.flat~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (A.flat~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (A.flat~4 + MajThird) * Eighth,
+      (B.flat~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (G~4 + MajSixth) * Eighth,
+      (E~4 + MinSixth) * Eighth,
+      Rest * Eighth,
+      (E~4 + Fourth) * Eighth,
+      (C~4 + Fifth) * Eighth,
+      Rest * Quarter.dotted,
+
+      (A.flat~4 + MajThird) * Eighth,
+      (A.flat~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (A.flat~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (A.flat~4 + MajThird) * Eighth,
+      (B.flat~4 + MajThird) * Eighth,
+      (G~4 + MajSixth) * Eighth,
+
+      Rest * Whole,
+
+      (A.flat~4 + MajThird) * Eighth,
+      (A.flat~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (A.flat~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (A.flat~4 + MajThird) * Eighth,
+      (B.flat~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (G~4 + MajSixth) * Eighth,
+      (E~4 + MinSixth) * Eighth,
+      Rest * Eighth,
+      (E~4 + Fourth) * Eighth,
+      (C~4 + Fifth) * Eighth,
+      Rest * Quarter.dotted,
+
+      (D~3 + F.sharp~4 + E~5) * Eighth,
+      (D~3 + F.sharp~4 + E~5) * Eighth,
+      Rest * Eighth,
+      (D~3 + F.sharp~4 + E~5) * Eighth,
+      Rest * Eighth,
+      (D~3 + F.sharp~4 + C~5) * Eighth,
+      (D~3 + F.sharp~4 + E~5) * Eighth,
+      Rest * Eighth,
+      (G~4 + B~4 + G~5) * Eighth,
+      Rest * Quarter.dotted,
+      (G~3 + G~4) * Quarter,
+      Rest * Quarter
+    ),
+    SequentialRun(
+      A.flat~2 * Eighth,
+      Rest * Quarter,
+      E.flat~3 * Eighth,
+      Rest * Quarter,
+      A.flat~3 * Eighth,
+      Rest * Eighth,
+      G~3 * Eighth,
+      Rest * Quarter,
+      C~3 * Eighth,
+      Rest * Quarter,
+      G~2 * Eighth,
+      Rest * Eighth
+    ) repeat 3
+  )
+
+  def dSection = ParallelRun(
+    SequentialRun(
+      (C~5 + MajThird) * Eighth,
+      (A~4 + MinThird) * Eighth,
+      Rest * Eighth,
+      (E~4 + MinThird) * Eighth,
+      Rest * Quarter,
+      (E~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (F~4 + MajThird) * Eighth,
+      (C~5 + Fourth) * Eighth,
+      Rest * Eighth,
+      (C~5 + Fourth) * Eighth,
+      (F~4 + MajThird) * Eighth,
+      Rest * Quarter.dotted,
+
+      (G~4 + MajThird) * Quarter.triplet,
+      (F~5 + MajThird) * Quarter.triplet,
+      (F~5 + MajThird) * Quarter.triplet,
+      (F~5 + MajThird) * Quarter.triplet,
+      (E~5 + MinThird) * Quarter.triplet,
+      (D~5 + MinThird) * Quarter.triplet,
+
+      (C~5 + MajThird) * Eighth,
+      (A~4 + MinThird) * Eighth,
+      Rest * Eighth,
+      (F~4 + MajThird) * Eighth,
+      (E~4 + MinThird) * Eighth,
+      Rest * Quarter.dotted,
+
+      (C~5 + MajThird) * Eighth,
+      (A~4 + MinThird) * Eighth,
+      Rest * Eighth,
+      (E~4 + MinThird) * Eighth,
+      Rest * Quarter,
+      (E~4 + MajThird) * Eighth,
+      Rest * Eighth,
+      (F~4 + MajThird) * Eighth,
+      (C~5 + Fourth) * Eighth,
+      Rest * Eighth,
+      (C~5 + Fourth) * Eighth,
+      (F~4 + MajThird) * Eighth,
+      Rest * Quarter.dotted,
+
+      (G~4 + MajThird) * Eighth,
+      (D~5 + MinThird) * Eighth,
+      Rest * Eighth,
+      (D~5 + MinThird) * Eighth,
+      (D~5 + MinThird) * Quarter.triplet,
+      (C~5 + MajThird) * Quarter.triplet,
+      (B~4 + MinThird) * Quarter.triplet,
+
+      (G~4 + Fourth) * Eighth,
+      E~4 * Eighth,
+      Rest * Eighth,
+      E~4 * Eighth,
+      C~4 * Eighth,
+      Rest * Quarter.dotted
+    ),
+    SequentialRun(
+    
+    )
+  )
+
   def percussionASection = ParallelRun(
-    SequenceRun(
+    SequentialRun(
       ClosedHiHat * Quarter,
       ClosedHiHat * Eighth.triplet,
       Rest * Eighth.triplet,
       ClosedHiHat * Eighth.triplet
     ) repeat 4,
-    SequenceRun(
+    SequentialRun(
       Rest * Half,
       SnareDrum1 * Half,
       Rest * Half,
       SnareDrum1 * Half
     ),
-    SequenceRun(
+    SequentialRun(
       BassDrum2 * Whole,
       BassDrum2 * Whole
     )

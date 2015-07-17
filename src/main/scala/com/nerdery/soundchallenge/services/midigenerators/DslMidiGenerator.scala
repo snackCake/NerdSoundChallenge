@@ -53,10 +53,10 @@ trait Run {
   def expand(start: Long): Seq[NoteEvent]
   def length: Long
 
-  def repeat(times: Int) = new SequenceRun(List.fill(times)(this):_*)
+  def repeat(times: Int) = new SequentialRun(List.fill(times)(this):_*)
 }
 
-case class SequenceRun(runs: Run*) extends Run {
+case class SequentialRun(runs: Run*) extends Run {
   override def expand(start: Long) = {
     var expanded = Seq[NoteEvent]()
     var tick = start

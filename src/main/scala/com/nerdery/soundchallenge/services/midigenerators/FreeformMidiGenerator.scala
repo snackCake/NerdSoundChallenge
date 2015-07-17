@@ -4,6 +4,12 @@ import java.io.OutputStream
 import javax.sound.midi._
 import com.nerdery.soundchallenge.midi.MidiCommands._
 
+/**
+ * @author Justin Mullin
+ *
+ * Forked from AbstractMidiGenerator to allow some more flexibility in generation.
+ *
+ */
 abstract class FreeformMidiGenerator extends MidiGenerator {
 
   def generateSong(outputStream: OutputStream) {

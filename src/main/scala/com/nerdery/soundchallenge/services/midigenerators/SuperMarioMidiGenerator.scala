@@ -2,10 +2,13 @@ package com.nerdery.soundchallenge.services.midigenerators
 
 import javax.sound.midi.Sequence
 
+import com.nerdery.soundchallenge.services.midigenerators.dsl.Key._
+import com.nerdery.soundchallenge.services.midigenerators.dsl.Interval._
+import com.nerdery.soundchallenge.services.midigenerators.dsl.Duration._
+import dsl._
 import com.nerdery.soundchallenge.midi.GeneralMidiVoices._
 import com.nerdery.soundchallenge.midi.GeneralMidiVoices.Percussion._
-import com.nerdery.soundchallenge.services.midigenerators.Duration._
-import com.nerdery.soundchallenge.services.midigenerators.Interval._
+import com.nerdery.soundchallenge.services.midigenerators.dsl.{SequentialRun, DslMidiGenerator}
 import org.springframework.beans.factory.config.ConfigurableBeanFactory
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
@@ -13,7 +16,11 @@ import org.springframework.stereotype.Component
 /**
  * @author Justin Mullin
  *
- * The one, the only, the classic.
+ * The one, the only, the classic.  Apologies to Ryan Evans for (accidentally) copying his idea!
+ *
+ * Transcribed by hand from sheet music at
+ * http://www.gamemusicthemes.com/sheetmusic/nintendo/supermariobros/overworldtheme/
+ *
  */
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

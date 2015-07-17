@@ -13,14 +13,7 @@ import java.util.stream.IntStream;
  * <h1>Generates the Mario theme song!</h1>
  * Well... one of them at least - there are so many.<br/><br/>
  *
- * This MIDI contains 4 tracks, each with notes on a separate channel.<br/>
- * I chose to use more natural sounds that makes it sound like a real band is playing it. The "voices" used are:
- * <ol>
- *     <li>Electric Grand Piano - playing the melody</li>
- *     <li>Trumpet - playing the harmony</li>
- *     <li>Electric Bass (finger version) - playing the bass</li>
- *     <li>Woodblock - playing the percussion</li>
- * </ol>
+ * This MIDI contains 4 tracks, each with notes on a separate channel.<br/>ddC
  * 
  * <em>FAIR WARNING!:</em> I used a version of this song that I found on the web as a guide (I wouldn't have been able
  * to do it otherwise). I <em>DID NOT</em> decode, parse, capture, or otherwise programatically extract any data from
@@ -37,9 +30,9 @@ import java.util.stream.IntStream;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class MarioGenerator extends AbstractMidiGenerator {
 
-    protected static final int MELODY_VOICE = 0x02;
-    protected static final int HARMONY_VOICE = 0x38;
-    protected static final int BASS_VOICE = 0x21;
+    protected static final int MELODY_VOICE = 0x50;
+    protected static final int HARMONY_VOICE = 0x50;
+    protected static final int BASS_VOICE = 0x1A;
     protected static final int PERCUSSION_VOICE = 0x73;
 
     private static final long SIXTEENTH_TICKS = 8;

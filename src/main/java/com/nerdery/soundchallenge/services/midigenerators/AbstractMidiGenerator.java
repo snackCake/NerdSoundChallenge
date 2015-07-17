@@ -20,6 +20,7 @@ public abstract class AbstractMidiGenerator implements MidiGenerator {
     protected static final int QUARTER_TICKS = 60;
 
     private Map<String, Long> currentTicks = new HashMap<>();
+    private Map<String, Integer> channels = new HashMap<>();
 
     @Override
     public void generateSong(OutputStream outputStream) throws IOException, InvalidMidiDataException {
@@ -44,8 +45,21 @@ public abstract class AbstractMidiGenerator implements MidiGenerator {
         return newTicks;
     }
 
+    protected void resetTrackTicks(String trackId) {
+        currentTicks.remove(trackId);
+    }
+
+    protected int getChannel(String trackId) {
+        return channels.get(trackId);
+    }
+
     protected Track buildTrack(Sequence sequence, String trackName) throws InvalidMidiDataException {
+        return buildTrack(sequence, trackName, 0);
+    }
+
+    protected Track buildTrack(Sequence sequence, String trackName, int channel) throws InvalidMidiDataException {
         Track track = sequence.createTrack();
+        channels.put(track.toString(), channel);
         enableGeneralMidi(track);
         configureTempo(track);
         nameTrack(track, trackName);
@@ -56,15 +70,28 @@ public abstract class AbstractMidiGenerator implements MidiGenerator {
     protected abstract void addNotes(Sequence sequence) throws InvalidMidiDataException;
 
     protected void addNote(Track track, int note, long duration) throws InvalidMidiDataException {
+        addNote(track, note, 0l, duration);
+    }
+
+    protected void addNote(Track track, int channel, int note, long duration) throws InvalidMidiDataException {
+        addNote(track, channel, note, 0l, duration);
+    }
+
+    protected void addNote(Track track, int note, long pause, long duration) throws InvalidMidiDataException {
+        addNote(track, getChannel(track.toString()), note, pause, duration);
+    }
+
+    protected void addNote(Track track, int channel, int note, long pause, long duration)
+            throws InvalidMidiDataException {
         //****  note on ****
         ShortMessage shortMessage = new ShortMessage();
-        shortMessage.setMessage(0x90, note, 0x60);
-        MidiEvent midiEvent = new MidiEvent(shortMessage, getTrackTicks(track.toString()));
+        shortMessage.setMessage(ShortMessage.NOTE_ON, channel, note, 0x60);
+        MidiEvent midiEvent = new MidiEvent(shortMessage, addTrackTicks(track.toString(), pause));
         track.add(midiEvent);
 
         //****  note off  ****
         shortMessage = new ShortMessage();
-        shortMessage.setMessage(0x80, note, 0x40);
+        shortMessage.setMessage(ShortMessage.NOTE_OFF, channel, note, 0x40);
         midiEvent = new MidiEvent(shortMessage, addTrackTicks(track.toString(), duration));
         track.add(midiEvent);
     }
@@ -90,16 +117,24 @@ public abstract class AbstractMidiGenerator implements MidiGenerator {
     }
 
     protected void setVoice(Track track, int voiceNumber) throws InvalidMidiDataException {
+        setVoice(track, getChannel(track.toString()), voiceNumber);
+    }
+
+    protected void setVoice(Track track, int channel, int voiceNumber) throws InvalidMidiDataException {
         ShortMessage shortMessage = new ShortMessage();
-        shortMessage.setMessage(0xC0, voiceNumber, 0x0);
+        shortMessage.setMessage(0xC0, channel, voiceNumber, 0x0);
         track.add(new MidiEvent(shortMessage, (long) 0));
     }
 
     protected void endTrack(Track track) throws InvalidMidiDataException {
+        endTrack(track, 0l);
+    }
+
+    protected void endTrack(Track track, long delay) throws InvalidMidiDataException {
         MetaMessage metaMessage = new MetaMessage();
         byte[] bet = {}; // empty array
         metaMessage.setMessage(0x2F, bet, 0);
-        track.add(new MidiEvent(metaMessage, (long) 140));
+        track.add(new MidiEvent(metaMessage, addTrackTicks(track.toString(), delay)));
     }
 
     private void configureTempo(Track track) throws InvalidMidiDataException {

@@ -54,6 +54,7 @@ trait Run {
   def length: Long
 
   def repeat(times: Int) = new SequentialRun(List.fill(times)(this):_*)
+  def repeatFill(other: Run) = repeat(other.length.toInt / length.toInt)
 }
 
 case class SequentialRun(runs: Run*) extends Run {

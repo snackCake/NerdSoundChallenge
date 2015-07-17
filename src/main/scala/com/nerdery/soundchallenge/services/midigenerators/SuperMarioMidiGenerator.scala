@@ -32,12 +32,21 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
         aSection repeat 2,
         dSection repeat 2,
         cSection,
-        dSection repeat 2
+        dSection
       )
     }
 
     percussionTrack("percussion", tempo) { implicit t =>
-      percussionASection repeat 37
+      SequentialRun(
+        percussionABSection repeatFill intro,
+        percussionABSection repeatFill aSection repeat 2,
+        percussionABSection repeatFill bSection repeat 2,
+        percussionCSection repeatFill cSection,
+        percussionABSection repeatFill aSection repeat 2,
+        percussionDSection repeatFill dSection repeat 2,
+        percussionCSection repeatFill cSection,
+        percussionDSection repeatFill dSection
+      )
     }
   }
 
@@ -331,11 +340,70 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
       Rest * Quarter.dotted
     ),
     SequentialRun(
-    
+      C~3 * Eighth,
+      Rest * Quarter,
+      F.sharp~3 * Eighth,
+      G~3 * Eighth,
+      Rest * Eighth,
+      C~4 * Eighth,
+      Rest * Eighth,
+      F~3 * Eighth,
+      Rest * Eighth,
+      F~3 * Eighth,
+      Rest * Eighth,
+      C~4 * Eighth,
+      C~4 * Eighth,
+      F~3 * Eighth,
+      Rest * Eighth,
+
+      D~3 * Eighth,
+      Rest * Quarter,
+      F~3 * Eighth,
+      G~3 * Eighth,
+      Rest * Eighth,
+      B~3 * Eighth,
+      Rest * Eighth,
+      G~3 * Eighth,
+      Rest * Eighth,
+      G~3 * Eighth,
+      Rest * Eighth,
+      C~3 * Eighth,
+      C~3 * Eighth,
+      G~3 * Eighth,
+      Rest * Eighth,
+
+      C~3 * Eighth,
+      Rest * Quarter,
+      F.sharp~3 * Eighth,
+      G~3 * Eighth,
+      Rest * Eighth,
+      C~4 * Eighth,
+      Rest * Eighth,
+      F~3 * Eighth,
+      Rest * Eighth,
+      F~3 * Eighth,
+      Rest * Eighth,
+      C~4 * Eighth,
+      C~4 * Eighth,
+      F~3 * Eighth,
+      Rest * Eighth,
+
+      G~3 * Eighth,
+      Rest * Quarter,
+      G~3 * Eighth,
+      G~3 * Quarter.triplet,
+      A~3 * Quarter.triplet,
+      B~3 * Quarter.triplet,
+      C~4 * Eighth,
+      Rest * Eighth,
+      G~3 * Eighth,
+      Rest * Eighth,
+      C~3 * Eighth,
+      Rest * Quarter.dotted
     )
   )
 
-  def percussionASection = ParallelRun(
+  def percussionABSection = ParallelRun(
     SequentialRun(
       ClosedHiHat * Quarter,
       ClosedHiHat * Eighth.triplet,
@@ -350,6 +418,51 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
     ),
     SequentialRun(
       BassDrum2 * Whole,
+      BassDrum2 * Whole
+    )
+  )
+
+  def percussionCSection = ParallelRun(
+    SequentialRun(
+      ClosedHiHat * Quarter.dotted,
+      ClosedHiHat * Quarter.dotted,
+      ClosedHiHat * Quarter,
+      ClosedHiHat * Quarter.dotted,
+      ClosedHiHat * Quarter,
+      Rest * Quarter.dotted
+    ),
+    SequentialRun(
+      Rest * Quarter.dotted,
+      SnareDrum1 * Half,
+      Rest * Half,
+      SnareDrum1 * Quarter,
+      Rest * Quarter.dotted
+    ),
+    SequentialRun(
+      Rest * Quarter,
+      BassDrum2 * Eighth,
+      Rest * Quarter,
+      BassDrum2 * Eighth,
+      Rest * Half,
+      Rest * Quarter.dotted,
+      BassDrum2 * Eighth,
+      BassDrum2 * Eighth,
+      BassDrum2 * Eighth
+    )
+  )
+  
+  def percussionDSection = ParallelRun(
+    SequentialRun(
+      ClosedHiHat * Quarter.dotted,
+      ClosedHiHat * Eighth,
+      ClosedHiHat * Quarter,
+      ClosedHiHat * Quarter
+    ),
+    SequentialRun(
+      Rest * Half,
+      SnareDrum1 * Half
+    ),
+    SequentialRun(
       BassDrum2 * Whole
     )
   )

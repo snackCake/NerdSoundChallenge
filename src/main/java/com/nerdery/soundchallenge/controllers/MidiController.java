@@ -25,14 +25,14 @@ public class MidiController {
     public static final String MIDI_MIME_TYPE = "application/x-midi";
     private MidiService midiService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String getIndex(Model model) {
-        Stream<MidiGeneratorEntry> midiGenerators = midiService.getGenerators().stream().map((generator) ->
-                new MidiGeneratorEntry(generator.getName(), String.format("/midi/%s.mid", generator.getName())));
-
-        model.addAttribute("generators", midiGenerators.collect(Collectors.toList()));
-        return "index";
-    }
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String getIndex(Model model) {
+//        Stream<MidiGeneratorEntry> midiGenerators = midiService.getGenerators().stream().map((generator) ->
+//                new MidiGeneratorEntry(generator.getName(), String.format("/midi/%s.mid", generator.getName())));
+//
+//        model.addAttribute("generators", midiGenerators.collect(Collectors.toList()));
+//        return "index";
+//    }
 
     @RequestMapping(value = "/midi/{name}.mid", method = RequestMethod.GET)
     public void getMidiFile(@PathVariable("name") String filterName, HttpServletResponse response)

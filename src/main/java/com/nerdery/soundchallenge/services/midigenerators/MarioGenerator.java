@@ -1294,10 +1294,4 @@ public class MarioGenerator extends AbstractMidiGenerator {
     private void repeat(int times, Runnable r) {
         IntStream.range(0, times).forEach(i -> r.run());
     }
-
-    //
-
-    public static void main(String[] args) throws Exception {
-        new MarioGenerator().generateSong(new java.io.FileOutputStream("mario.mid"));
-    }
 }

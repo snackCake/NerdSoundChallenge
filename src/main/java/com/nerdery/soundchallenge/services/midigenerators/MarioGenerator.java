@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
  * <h1>Generates the Mario theme song!</h1>
  * Well... one of them at least - there are so many.<br/><br/>
  *
- * This MIDI contains 4 tracks, each with notes on a separate channel.<br/>ddC
+ * This MIDI contains 4 tracks, each with notes on a separate channel.<br/>
  * 
  * <em>FAIR WARNING!:</em> I used a version of this song that I found on the web as a guide (I wouldn't have been able
  * to do it otherwise). I <em>DID NOT</em> decode, parse, capture, or otherwise programatically extract any data from

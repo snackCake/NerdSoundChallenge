@@ -44,14 +44,19 @@ trait DslMidiGenerator extends FreeformMidiGenerator {
 
 case class Chord(keys: Key*) {
   def *(duration: Duration) = new ParallelRun(keys.map(_ * duration):_*)
+  def +(key: Key) = Chord(keys :+ key:_*)
+  def +(interval: Interval) = Chord(keys :+ Key(keys.last.pitch+interval.halfSteps, keys.last.octave):_*)
+  def -(interval: Interval) = Chord(keys :+ Key(keys.last.pitch-interval.halfSteps, keys.last.octave):_*)
 }
 
 trait Run {
   def expand(start: Long): Seq[NoteEvent]
   def length: Long
+
+  def repeat(times: Int) = new SequenceRun(List.fill(times)(this):_*)
 }
 
-class SequenceRun(runs: Run*) extends Run {
+case class SequenceRun(runs: Run*) extends Run {
   override def expand(start: Long) = {
     var expanded = Seq[NoteEvent]()
     var tick = start
@@ -64,11 +69,9 @@ class SequenceRun(runs: Run*) extends Run {
     expanded
   }
   override def length = runs.map(_.length).sum
-
-  def repeat(times: Int) = new SequenceRun(List.fill(times)(this):_*)
 }
 
-class ParallelRun(runs: Run*) extends Run {
+case class ParallelRun(runs: Run*) extends Run {
   override def expand(start: Long) = {
     var expanded = Seq[NoteEvent]()
 
@@ -86,6 +89,24 @@ case class NoteEvent(tick: Long, note: Note)
 case class Note(key: Key, duration: Duration) extends Run {
   override def expand(start: Long) = Seq(NoteEvent(start, this))
   override def length = duration.ticks
+
+  def *(n: Int) = Note(key, Duration(duration.ticks*n))
+}
+
+case class Interval(halfSteps: Int)
+
+object Interval {
+  val MinSecond = Interval(1)
+  val MajSecond = Interval(2)
+  val MinThird = Interval(3)
+  val MajThird = Interval(4)
+  val Fourth = Interval(5)
+  val Fifth = Interval(7)
+  val MinSixth = Interval(8)
+  val MajSixth = Interval(9)
+  val MinSeventh = Interval(10)
+  val MajSeventh = Interval(11)
+  val Octave = Interval(12)
 }
 
 object Rest {
@@ -95,6 +116,8 @@ object Rest {
 case class Rest(duration: Duration) extends Run {
   override def expand(start: Long) = Seq()
   override def length = duration.ticks
+
+  def *(n: Int) = Rest(Duration(duration.ticks*n))
 }
 
 case class Duration(ticks: Long) {
@@ -122,6 +145,14 @@ case class Key(_pitch: Int, _octave: Int) {
   def flat = Key(pitch-1, octave)
 
   def *(duration: Duration) = Note(this, duration)
+  def +(key: Key) = Chord(this, key)
+  def +(interval: Interval) = {
+    println(f"From $pitch to ${pitch+interval.halfSteps}")
+    Chord(this, Key(pitch+interval.halfSteps, octave))
+  }
+  def -(interval: Interval) = {
+    Chord(this, Key(pitch-interval.halfSteps, octave))
+  }
 }
 
 object C extends Key(0, 4)

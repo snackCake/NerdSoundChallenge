@@ -1,7 +1,7 @@
 package com.nerdery.soundchallenge.midi
 
 /**
- * Constrants for general midi voice patches
+ * Constants for general midi voice patches
  */
 object GeneralMidiVoices {
   val AcousticGrandPiano = 1

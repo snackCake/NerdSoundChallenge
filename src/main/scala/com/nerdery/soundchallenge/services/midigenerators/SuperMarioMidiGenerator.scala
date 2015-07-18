@@ -50,7 +50,7 @@ import org.springframework.stereotype.Component
 class SuperMarioMidiGenerator extends DslMidiGenerator {
   val tempo = 200
 
-  override def getName: String = "superMario"
+  override def getName: String = "jmullinSuperMario"
 
   override def generate(implicit sequence: Sequence): Unit = {
     track("melody", SynthBass1, tempo) { implicit t =>

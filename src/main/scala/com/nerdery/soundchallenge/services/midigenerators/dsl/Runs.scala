@@ -1,12 +1,8 @@
 package com.nerdery.soundchallenge.services.midigenerators.dsl
 
-case class Chord(keys: Key*) {
-  def *(duration: Duration) = new ParallelRun(keys.map(_ * duration):_*)
-  def +(key: Key) = Chord(keys :+ key:_*)
-  def +(interval: Interval) = Chord(keys :+ Key(keys.last.pitch+interval.halfSteps, keys.last.octave):_*)
-  def -(interval: Interval) = Chord(keys :+ Key(keys.last.pitch-interval.halfSteps, keys.last.octave):_*)
-}
-
+/**
+ * A run is a container which can be expanded to a set of note events
+ */
 trait Run {
   def expand(start: Long): Seq[NoteEvent]
   def length: Long
@@ -15,6 +11,9 @@ trait Run {
   def repeatFill(other: Run) = repeat(other.length.toInt / length.toInt)
 }
 
+/**
+ * A sequential run contains one or more sub-runs which will play one after another
+ */
 case class SequentialRun(runs: Run*) extends Run {
   override def expand(start: Long) = {
     var expanded = Seq[NoteEvent]()
@@ -30,6 +29,9 @@ case class SequentialRun(runs: Run*) extends Run {
   override def length = runs.map(_.length).sum
 }
 
+/**
+ * A parallel run contains one or more sub-runs which will play simultaneously
+ */
 case class ParallelRun(runs: Run*) extends Run {
   override def expand(start: Long) = {
     var expanded = Seq[NoteEvent]()
@@ -43,4 +45,5 @@ case class ParallelRun(runs: Run*) extends Run {
   override def length = runs.map(_.length).max
 }
 
-case class NoteEvent(tick: Long, note: Note)
+
+

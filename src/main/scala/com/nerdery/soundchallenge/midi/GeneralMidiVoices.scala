@@ -1,5 +1,8 @@
 package com.nerdery.soundchallenge.midi
 
+/**
+ * Constrants for general midi voice patches
+ */
 object GeneralMidiVoices {
   val AcousticGrandPiano = 1
   val BrightAcousticPiano = 2
@@ -129,8 +132,11 @@ object GeneralMidiVoices {
   val Helicopter = 126
   val Applause = 127
   val Gunshot = 128
-  
-  object Percussion{
+
+  /**
+   * Percussion channel key mappings
+   */
+  object Percussion {
     val BassDrum2 = 23
     val BassDrum1 = 24
     val SideStickRimshot = 25

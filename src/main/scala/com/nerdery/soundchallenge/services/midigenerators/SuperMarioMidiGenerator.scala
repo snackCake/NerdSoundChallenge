@@ -29,7 +29,7 @@ class SuperMarioMidiGenerator extends DslMidiGenerator {
 
   override def getName: String = "superMario"
 
-  override def generate()(implicit sequence: Sequence): Unit = {
+  override def generate(implicit sequence: Sequence): Unit = {
     track("melody", SynthBass1, tempo) { implicit t =>
       SequentialRun(
         intro,

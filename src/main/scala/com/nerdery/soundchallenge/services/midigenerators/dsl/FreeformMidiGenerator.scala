@@ -1,8 +1,10 @@
-package com.nerdery.soundchallenge.services.midigenerators
+package com.nerdery.soundchallenge.services.midigenerators.dsl
 
 import java.io.OutputStream
 import javax.sound.midi._
+
 import com.nerdery.soundchallenge.midi.MidiCommands._
+import com.nerdery.soundchallenge.services.midigenerators.MidiGenerator
 
 /**
  * @author Justin Mullin
@@ -11,7 +13,6 @@ import com.nerdery.soundchallenge.midi.MidiCommands._
  *
  */
 abstract class FreeformMidiGenerator extends MidiGenerator {
-
   def generateSong(outputStream: OutputStream) {
     val sequence = buildSequence()
     build(sequence)
@@ -90,5 +91,9 @@ abstract class FreeformMidiGenerator extends MidiGenerator {
     MidiSystem.write(sequence, 1, theOutputStream)
   }
 
-  def buildSequence() = new Sequence(Sequence.PPQ, 60)
+  def buildSequence() = new Sequence(Sequence.PPQ, FreeformMidiGenerator.Resolution)
+}
+
+object FreeformMidiGenerator {
+  val Resolution = 60
 }

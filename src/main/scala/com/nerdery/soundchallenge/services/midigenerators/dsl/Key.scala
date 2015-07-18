@@ -1,5 +1,8 @@
 package com.nerdery.soundchallenge.services.midigenerators.dsl
 
+/**
+ * Represents a single key on the "keyboard"
+ */
 case class Key(_pitch: Int, _octave: Int) {
   val octave = _octave + _pitch/12
   val pitch = _pitch % 12
@@ -13,13 +16,8 @@ case class Key(_pitch: Int, _octave: Int) {
 
   def *(duration: Duration) = Note(this, duration)
   def +(key: Key) = Chord(this, key)
-  def +(interval: Interval) = {
-    println(f"From $pitch to ${pitch+interval.halfSteps}")
-    Chord(this, Key(pitch+interval.halfSteps, octave))
-  }
-  def -(interval: Interval) = {
-    Chord(this, Key(pitch-interval.halfSteps, octave))
-  }
+  def +(interval: Interval) = Chord(this, Key(pitch+interval.halfSteps, octave))
+  def -(interval: Interval) = Chord(this, Key(pitch-interval.halfSteps, octave))
 }
 
 object Key {

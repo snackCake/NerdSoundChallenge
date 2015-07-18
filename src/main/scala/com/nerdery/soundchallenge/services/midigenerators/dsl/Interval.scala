@@ -1,5 +1,8 @@
 package com.nerdery.soundchallenge.services.midigenerators.dsl
 
+/**
+ * Represents a musical interval between two keys
+ */
 case class Interval(halfSteps: Int)
 
 object Interval {

@@ -41,8 +41,9 @@ import org.springframework.stereotype.Component
  *   example: SequentialRun(C~4 * Quarter, E~4 * Quarter, G~4 * Quarter) repeat 3
  *
  * Chords: a chord is simply a small convenience wrapper around a parallel run to simplify construction.  To
- * instantiate the run, assign a duration to the chord as you would a single pitch.
- *   example: Chord(C~4, E~4, G~4) * Whole
+ * instantiate a chord, use the + operator to string together two or more pitches, then assign a duration to the chord
+ * as you would a single pitch.
+ *   example: (C~4 + E~4 + G~4) * Whole
  *
  */
 @Component

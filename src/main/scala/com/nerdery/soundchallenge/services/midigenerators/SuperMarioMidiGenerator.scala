@@ -16,10 +16,33 @@ import org.springframework.stereotype.Component
 /**
  * @author Justin Mullin
  *
- * The one, the only, the classic.  Apologies to Ryan Evans for (accidentally) copying his idea!
+ * Super Mario World #1 - the one, the only, the classic.
+ *
+ * Sincerest apologies to Ryan Evans for (accidentally) copying his idea!
  *
  * Transcribed by hand from sheet music at
- * http://www.gamemusicthemes.com/sheetmusic/nintendo/supermariobros/overworldtheme/
+ *   http://www.gamemusicthemes.com/sheetmusic/nintendo/supermariobros/overworldtheme/
+ *
+ * The basic components of the DSL are as follows:
+ *
+ * Pitch: pitches are defined by specifying a key and an octave separated by a tilde.
+ *   example: C~4 for middle C
+ *
+ * Note: a song is composed up of some number of notes, which are defined as a pitch and a duration, represented
+ * by a multiplication sign.  Common durations are exposed as constants, and dotted/triplet durations are accessible
+ * as methods on the duration.
+ *   example: C~4 * Eighth.triplet
+ *
+ * Runs: notes are contained within runs, which provide structure.  There are two kinds of runs, parallel and
+ * sequential.  Parallel runs align their children to play simultaneously, while sequential runs align their
+ * notes to play one after another.
+ * Runs can be nested within each other to build the structure for a song and repeated as necessary.  When
+ * the MIDI file is generated, the runs will determine by relative position when each note should play.
+ *   example: SequentialRun(C~4 * Quarter, E~4 * Quarter, G~4 * Quarter) repeat 3
+ *
+ * Chords: a chord is simply a small convenience wrapper around a parallel run to simplify construction.  To
+ * instantiate the run, assign a duration to the chord as you would a single pitch.
+ *   example: Chord(C~4, E~4, G~4) * Whole
  *
  */
 @Component

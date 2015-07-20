@@ -6,12 +6,11 @@ import org.springframework.util.Assert;
 
 import javax.inject.Inject;
 import javax.sound.midi.InvalidMidiDataException;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -37,5 +36,9 @@ public class MidiService {
 
     public boolean isValidGenerator(String filterName) {
         return generators.containsKey(filterName);
+    }
+
+    public Collection<MidiGenerator> getGenerators() {
+        return this.generators.values();
     }
 }

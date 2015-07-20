@@ -31,10 +31,12 @@ repositories {
 
 
 dependencies {
+    compile files("lib/MidiReference1.0.jar")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("javax.inject:javax.inject:1")
     compile("org.scala-lang:scala-library:2.11.7")
+    compile("org.apache.commons:commons-lang3:3.1")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 

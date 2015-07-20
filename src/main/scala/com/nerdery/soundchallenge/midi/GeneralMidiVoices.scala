@@ -1,5 +1,8 @@
 package com.nerdery.soundchallenge.midi
 
+/**
+ * Constants for general midi voice patches
+ */
 object GeneralMidiVoices {
   val AcousticGrandPiano = 1
   val BrightAcousticPiano = 2
@@ -129,4 +132,57 @@ object GeneralMidiVoices {
   val Helicopter = 126
   val Applause = 127
   val Gunshot = 128
+
+  /**
+   * Percussion channel key mappings
+   */
+  object Percussion {
+    val BassDrum2 = 23
+    val BassDrum1 = 24
+    val SideStickRimshot = 25
+    val SnareDrum1 = 26
+    val HandClap = 27
+    val SnareDrum2 = 28
+    val LowTom2 = 29
+    val ClosedHiHat = 30
+    val LowTom1 = 31
+    val PedalHiHat = 32
+    val MidTom2 = 33
+    val OpenHiHat = 34
+    val MidTom1 = 35
+    val HighTom2 = 36
+    val CrashCymbal1 = 37
+    val HighTom1 = 38
+    val RideCymbal1 = 39
+    val ChineseCymbal = 40
+    val RideBell = 41
+    val Tambourine = 42
+    val SplashCymbal = 43
+    val Cowbell = 44
+    val CrashCymbal2 = 45
+    val VibraSlap = 46
+    val RideCymbal2 = 47
+    val HighBongo = 48
+    val LowBongo = 49
+    val MuteHighConga = 50
+    val OpenHighConga = 51
+    val LowConga = 52
+    val HighTimbale = 53
+    val LowTimbale = 54
+    val HighAgogo = 55
+    val LowAgogo = 56
+    val Cabasa = 57
+    val Maracas = 58
+    val ShortWhistle = 59
+    val LongWhistle = 60
+    val ShortGuiro = 61
+    val LongGuiro = 62
+    val Claves = 63
+    val HighWoodBlock = 64
+    val LowWoodBlock = 65
+    val MuteCuica = 66
+    val OpenCuica = 67
+    val MuteTriangle = 68
+    val OpenTriangle = 69
+  }
 }
